@@ -16,6 +16,35 @@ oracle-performance-tuning/
 └── docs/   -- concepts and troubleshooting runbooks
 ```
 
+## Scripts
+
+| Script | What it does |
+|---|---|
+| `sql/top_sql_by_elapsed.sql` | Top SQL by elapsed time in an AWR snapshot range; defaults to the two latest snapshots |
+| `sql/top_sessions_ash.sql` | Most active sessions in the last N minutes from ASH, with wait events |
+
+Top SQL for the default window (the two most recent snapshots):
+
+```
+sqlplus / as sysdba @sql/top_sql_by_elapsed.sql
+```
+
+For a specific incident window, set the snapshot IDs at the top of the script:
+
+```
+DEFINE begin_snap = 4121
+DEFINE end_snap   = 4125
+```
+
+Who's active right now (15-minute default — edit the `DEFINE` to change it):
+
+```
+sqlplus / as sysdba @sql/top_sessions_ash.sql
+```
+
+Both are diagnostic listings: read-only, exit 0. If AWR vs ASH isn't
+second nature yet, start with `docs/awr-ash-concepts.md`.
+
 ## Assumptions
 
 - Oracle 11g or later. The AWR queries read `DBA_HIST_*`; the ASH query reads `V$ACTIVE_SESSION_HISTORY`.
