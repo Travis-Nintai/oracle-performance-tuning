@@ -1,0 +1,25 @@
+# SQL*Plus / Oracle artifacts
+*.log
+*.lis
+*.spo
+*.dmp
+*.trc
+*.trm
+*.aud
+
+# Editor and OS artifacts
+.vscode/
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+# Credentials and environment-specific files - never commit these
+*.wallet
+ewallet.*
+cwallet.*
+*.pfx
+*.pem
+*.key
+tnsnames.ora
+sqlnet.ora
