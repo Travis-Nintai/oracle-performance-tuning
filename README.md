@@ -45,6 +45,10 @@ sqlplus / as sysdba @sql/top_sessions_ash.sql
 Both are diagnostic listings: read-only, exit 0. If AWR vs ASH isn't
 second nature yet, start with `docs/awr-ash-concepts.md`.
 
+The decision process for a CPU spike is written up in
+`docs/high-cpu-runbook.md` — host vs database, finding the sessions,
+common causes, and what not to do.
+
 ## Assumptions
 
 - Oracle 11g or later. The AWR queries read `DBA_HIST_*`; the ASH query reads `V$ACTIVE_SESSION_HISTORY`.
