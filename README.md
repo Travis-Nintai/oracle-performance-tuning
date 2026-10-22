@@ -49,6 +49,14 @@ The decision process for a CPU spike is written up in
 `docs/high-cpu-runbook.md` — host vs database, finding the sessions,
 common causes, and what not to do.
 
+Once a slow statement is identified, `docs/execution-plan-guide.md` covers
+how to get its real execution plan with DBMS_XPLAN, how to read access
+paths, join methods, and estimates against actual rows, and how to find
+where the optimizer's picture of the data went wrong.
+`docs/plan-analysis-example.md` applies that method to one fictional lab
+statement end to end: a skewed column, a missing histogram, and an index
+plan that falls apart at scale.
+
 ## Assumptions
 
 - Oracle 11g or later. The AWR queries read `DBA_HIST_*`; the ASH query reads `V$ACTIVE_SESSION_HISTORY`.
