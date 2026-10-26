@@ -1,8 +1,8 @@
 # Oracle Performance Tuning
 
-When someone says "the database is slow," monitoring tells you something is wrong but rarely tells you why. This repo is the next step: finding the actual bottleneck — the SQL, the sessions, and the wait events behind a slow database — using Oracle's own performance data: AWR and ASH.
+When someone says "the database is slow," monitoring tells you something is wrong but rarely tells you why. This repo is the next step: finding the actual bottleneck, the SQL, the sessions, and the wait events behind a slow database, using Oracle's own performance data: AWR and ASH.
 
-The scripts here are the first things to reach for on a slow-database call: what ran longest, who is active right now, and what they're waiting on. The docs cover the concepts behind them and a runbook for the most common case — unexplained high CPU.
+The scripts here are the first things to reach for on a slow-database call: what ran longest, who is active right now, and what they're waiting on. The docs cover the concepts behind them and a runbook for the most common case, unexplained high CPU.
 
 ## Who it's for
 
@@ -36,7 +36,7 @@ DEFINE begin_snap = 4121
 DEFINE end_snap   = 4125
 ```
 
-Who's active right now (15-minute default — edit the `DEFINE` to change it):
+Who's active right now (15-minute default, edit the `DEFINE` to change it):
 
 ```
 sqlplus / as sysdba @sql/top_sessions_ash.sql
@@ -46,7 +46,7 @@ Both are diagnostic listings: read-only, exit 0. If AWR vs ASH isn't
 second nature yet, start with `docs/awr-ash-concepts.md`.
 
 The decision process for a CPU spike is written up in
-`docs/high-cpu-runbook.md` — host vs database, finding the sessions,
+`docs/high-cpu-runbook.md`, host vs database, finding the sessions,
 common causes, and what not to do.
 
 Once a slow statement is identified, `docs/execution-plan-guide.md` covers
@@ -60,14 +60,14 @@ plan that falls apart at scale.
 ## Assumptions
 
 - Oracle 11g or later. The AWR queries read `DBA_HIST_*`; the ASH query reads `V$ACTIVE_SESSION_HISTORY`.
-- AWR and ASH both require the Oracle Diagnostics Pack license. The scripts say so in their headers. If the database isn't licensed for Diagnostics Pack, these views aren't available — Statspack is the free alternative, and the concepts in `docs/awr-ash-concepts.md` still mostly apply.
+- AWR and ASH both require the Oracle Diagnostics Pack license. The scripts say so in their headers. If the database isn't licensed for Diagnostics Pack, these views aren't available. Statspack is the free alternative, and the concepts in `docs/awr-ash-concepts.md` still mostly apply.
 - Run as a user that can read the data dictionary and performance views (`/ as sysdba` works).
 - Database names and values in examples are fictional lab values.
 
 ## Safety notes
 
 - Everything here is read-only. No DML, no DDL, nothing that changes the database.
-- AWR queries against a large `SYSAUX` can be slow on the first run — that's the repository being queried, not your workload.
+- AWR queries against a large `SYSAUX` can be slow on the first run; that's the repository being queried, not your workload.
 - Never commit credentials, hostnames, or environment-specific details alongside these scripts.
 
 ## What this demonstrates
@@ -76,4 +76,4 @@ Performance diagnosis the way it actually happens: start from the symptom, use A
 
 ## Background
 
-Recreated from standard DBA practice for a personal lab portfolio — generic examples, not exports from any production environment.
+Recreated from standard DBA practice for a personal lab portfolio, generic examples, not exports from any production environment.
